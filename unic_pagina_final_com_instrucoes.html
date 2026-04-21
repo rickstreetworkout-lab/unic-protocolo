@@ -1,0 +1,954 @@
+<!-- 
+==========================================================
+  UNIC - PÁGINA DE VENDAS — INSTRUÇÕES DE PUBLICAÇÃO
+==========================================================
+
+LINKS PARA SUBSTITUIR NESTE ARQUIVO:
+  1. SEU_LINK_KIWIFY_AQUI → cole o link do checkout Kiwify
+     Exemplo: https://pay.kiwify.com.br/xXxXxXx
+     Aparece em 3 lugares: topbar, botão oferta, footer
+
+  2. SEU_LINK_QUIZ_AQUI → cole o link do quiz no Tally.so
+     Exemplo: https://tally.so/r/xXxXxX
+     Aparece na topbar (botão "Diagnóstico gratuito")
+
+PUBLICAR DE GRAÇA — PASSO A PASSO:
+  OPÇÃO A — Tiiny.host (mais rápido, 30 segundos):
+    1. Acesse: https://tiiny.host
+    2. Arraste este arquivo HTML
+    3. Escolha subdomínio: ex "unic21dias"
+    4. Clique "Upload" → link ativo imediatamente
+    → Seu link: https://unic21dias.tiiny.site
+
+  OPÇÃO B — Netlify (mais profissional, domínio próprio depois):
+    1. Acesse: https://app.netlify.com/drop
+    2. Arraste este arquivo HTML
+    3. Link gerado automaticamente
+    → Para domínio próprio: compre em registro.br (R$40/ano)
+      e conecte em Site Settings > Domain Management
+
+  OPÇÃO C — GitHub Pages (grátis, técnico):
+    1. Crie conta em github.com
+    2. Crie repositório público chamado "unic"
+    3. Faça upload deste arquivo como "index.html"
+    4. Settings > Pages > Source: main > Save
+    → Seu link: https://seuusuario.github.io/unic
+==========================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocolo UNIC 21 Dias — Você vai ter resultado. Ponto.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:    #050505;
+    --carbon:   #0d0d0d;
+    --plate:    #131313;
+    --wire:     #1c1c1c;
+    --gold:     #C9991A;
+    --gold-hot: #E8B820;
+    --gold-dim: #6B5010;
+    --gold-glow:rgba(201,153,26,0.12);
+    --white:    #EEEAE0;
+    --chalk:    #9A9890;
+    --rust:     #666054;
+    --red:      #C93030;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    background:var(--black);
+    color:var(--white);
+    font-family:'Barlow',sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+
+  ::-webkit-scrollbar{width:3px}
+  ::-webkit-scrollbar-thumb{background:var(--gold-dim)}
+
+  .wrap{max-width:700px;margin:0 auto;padding:0 20px}
+  .wrap-wide{max-width:980px;margin:0 auto;padding:0 20px}
+
+  /* ══ NOISE OVERLAY ══ */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity:0.018;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ══ TOPBAR ══ */
+  .topbar{
+    border-bottom:1px solid var(--wire);
+    padding:14px 0;
+    position:sticky;top:0;
+    background:rgba(5,5,5,0.97);
+    backdrop-filter:blur(12px);
+    z-index:100;
+  }
+  .topbar-inner{display:flex;justify-content:space-between;align-items:center}
+  .logo{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:20px;font-weight:900;
+    letter-spacing:.18em;color:var(--gold);
+    text-transform:uppercase;
+  }
+  .topbar-cta{
+    font-family:'DM Mono',monospace;
+    font-size:10px;letter-spacing:.1em;
+    color:var(--gold);border:1px solid var(--gold-dim);
+    padding:8px 18px;text-decoration:none;
+    transition:background .2s,border-color .2s;
+    text-transform:uppercase;
+  }
+  .topbar-cta:hover{background:var(--gold-glow);border-color:var(--gold)}
+
+  /* ══ HERO ══ */
+  .hero{
+    padding:0;
+    border-bottom:3px solid var(--gold);
+    position:relative;overflow:hidden;
+    min-height:94vh;
+    display:flex;align-items:flex-end;
+  }
+
+  /* grade de fundo tipo blueprint */
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(201,153,26,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,153,26,0.04) 1px, transparent 1px);
+    background-size:44px 44px;
+  }
+
+  /* linha diagonal cortando o herói */
+  .hero-slash{
+    position:absolute;
+    top:-100px;right:-80px;
+    width:2px;height:130%;
+    background:linear-gradient(to bottom, transparent, rgba(201,153,26,0.12) 30%, rgba(201,153,26,0.12) 70%, transparent);
+    transform:rotate(-15deg);
+    transform-origin:top right;
+  }
+  .hero-slash2{
+    position:absolute;
+    top:-100px;right:-130px;
+    width:1px;height:130%;
+    background:linear-gradient(to bottom, transparent, rgba(201,153,26,0.06) 30%, rgba(201,153,26,0.06) 70%, transparent);
+    transform:rotate(-15deg);
+    transform-origin:top right;
+  }
+
+  /* número grande fundo */
+  .hero-ghost{
+    position:absolute;
+    right:-30px;top:50%;
+    transform:translateY(-50%);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(200px,30vw,380px);
+    font-weight:900;
+    color:rgba(201,153,26,0.035);
+    line-height:1;letter-spacing:-.03em;
+    pointer-events:none;user-select:none;
+  }
+
+  .hero-content{
+    position:relative;z-index:2;
+    padding:100px 0 64px;
+    width:100%;
+  }
+
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'DM Mono',monospace;
+    font-size:9px;letter-spacing:.25em;
+    color:var(--gold);text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .hero-tag::before{content:'';display:block;width:28px;height:2px;background:var(--gold)}
+
+  .hero-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(52px,9vw,100px);
+    font-weight:900;
+    line-height:.92;
+    letter-spacing:-.01em;
+    text-transform:uppercase;
+    color:var(--white);
+    margin-bottom:0;
+  }
+  .hero-title .line-gold{color:var(--gold)}
+  .hero-title .line-stroke{
+    -webkit-text-stroke:2px var(--white);
+    color:transparent;
+  }
+
+  .hero-divider{
+    width:60px;height:3px;
+    background:var(--gold);
+    margin:28px 0;
+  }
+
+  .hero-sub{
+    font-size:17px;font-weight:400;
+    color:var(--chalk);
+    max-width:520px;
+    margin-bottom:40px;line-height:1.75;
+  }
+  .hero-sub strong{color:var(--white);font-weight:600}
+
+  .hero-cta-wrap{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+
+  .cta-primary{
+    display:inline-block;
+    background:var(--gold);
+    color:var(--black);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:22px;font-weight:900;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:20px 48px;
+    text-decoration:none;
+    transition:background .15s,transform .15s;
+    clip-path:polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+  .cta-primary:hover{background:var(--gold-hot);transform:translateY(-2px)}
+  .cta-primary:active{transform:translateY(0)}
+
+  .cta-note{
+    font-family:'DM Mono',monospace;
+    font-size:9px;letter-spacing:.12em;
+    color:var(--rust);text-transform:uppercase;
+  }
+
+  /* ══ PAIN BAR — número impactante ══ */
+  .pain-bar{
+    background:var(--plate);
+    border-top:1px solid var(--wire);
+    border-bottom:1px solid var(--wire);
+    padding:32px 0;
+  }
+  .pain-bar-inner{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:0;
+  }
+  .pb-item{
+    text-align:center;
+    padding:16px 12px;
+    border-right:1px solid var(--wire);
+  }
+  .pb-item:last-child{border-right:none}
+  .pb-num{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:40px;font-weight:900;
+    color:var(--gold);line-height:1;margin-bottom:4px;
+  }
+  .pb-label{
+    font-family:'DM Mono',monospace;
+    font-size:8px;letter-spacing:.12em;
+    color:var(--rust);text-transform:uppercase;
+  }
+
+  /* ══ SECTIONS ══ */
+  section{padding:88px 0;border-bottom:1px solid var(--wire);position:relative}
+
+  .sec-tag{
+    font-family:'DM Mono',monospace;
+    font-size:9px;letter-spacing:.28em;
+    color:var(--gold);text-transform:uppercase;
+    margin-bottom:20px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .sec-tag::before{content:'//';color:var(--gold-dim);font-size:10px}
+
+  .sec-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(34px,5vw,58px);
+    font-weight:900;text-transform:uppercase;
+    line-height:.96;letter-spacing:-.01em;
+    color:var(--white);margin-bottom:20px;
+  }
+  .sec-title .g{color:var(--gold)}
+
+  .sec-body{
+    font-size:16px;color:var(--chalk);
+    line-height:1.78;max-width:580px;
+  }
+  .sec-body strong{color:var(--white);font-weight:600}
+  .sec-body + .sec-body{margin-top:14px}
+
+  /* ══ PAIN ITEMS ══ */
+  .pain-list{list-style:none;margin-top:44px}
+  .pain-item{
+    display:flex;gap:20px;align-items:flex-start;
+    padding:22px 0;border-bottom:1px solid var(--wire);
+  }
+  .pain-item:first-child{border-top:1px solid var(--wire)}
+  .pain-n{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:13px;font-weight:700;letter-spacing:.1em;
+    color:var(--gold-dim);flex-shrink:0;margin-top:3px;min-width:22px;
+  }
+  .pain-text{font-size:15px;color:var(--chalk);line-height:1.7}
+  .pain-text strong{color:var(--white);font-weight:600}
+
+  .verdict{
+    margin-top:40px;
+    background:var(--plate);
+    border-left:4px solid var(--gold);
+    padding:24px 28px;
+  }
+  .verdict p{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:24px;font-weight:700;
+    color:var(--white);line-height:1.3;letter-spacing:.01em;
+    text-transform:uppercase;
+  }
+  .verdict p span{color:var(--gold)}
+
+  /* ══ METHOD CARDS ══ */
+  .method-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:2px;margin-top:44px;
+  }
+  .mc{
+    background:var(--plate);
+    border:1px solid var(--wire);
+    padding:30px 22px;
+    position:relative;overflow:hidden;
+    transition:border-color .25s;
+  }
+  .mc:hover{border-color:var(--gold-dim)}
+  .mc::before{
+    content:'';
+    position:absolute;top:0;left:0;right:0;
+    height:3px;
+    background:var(--gold);
+    transform:scaleX(0);transform-origin:left;
+    transition:transform .3s;
+  }
+  .mc:hover::before{transform:scaleX(1)}
+  .mc-ghost{
+    position:absolute;right:8px;bottom:-8px;
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:80px;font-weight:900;
+    color:rgba(201,153,26,0.06);
+    line-height:1;pointer-events:none;
+  }
+  .mc-week{
+    font-family:'DM Mono',monospace;font-size:8px;
+    letter-spacing:.18em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:10px;
+  }
+  .mc-name{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:28px;font-weight:900;
+    text-transform:uppercase;color:var(--white);
+    margin-bottom:6px;letter-spacing:.02em;
+  }
+  .mc-desc{font-size:12px;color:var(--chalk);line-height:1.6}
+
+  /* ══ WHO ══ */
+  .who-stack{display:flex;flex-direction:column;gap:2px;margin-top:40px}
+  .who-item{
+    background:var(--plate);border:1px solid var(--wire);
+    padding:20px 28px;display:flex;gap:20px;align-items:flex-start;
+    transition:border-color .25s;
+  }
+  .who-item:hover{border-color:var(--gold-dim)}
+  .who-dot{
+    width:8px;height:8px;
+    background:var(--gold);border-radius:50%;
+    flex-shrink:0;margin-top:6px;
+  }
+  .who-level{
+    font-family:'DM Mono',monospace;font-size:8px;
+    letter-spacing:.18em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:4px;
+  }
+  .who-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+  .who-desc{font-size:13px;color:var(--chalk);line-height:1.6}
+
+  /* Ambientes */
+  .env-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:2px;margin-top:28px;
+  }
+  .env-card{
+    border:1px solid var(--wire);padding:18px 16px;
+    transition:border-color .25s;
+  }
+  .env-card:hover{border-color:var(--gold-dim)}
+  .env-label{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:16px;font-weight:800;
+    text-transform:uppercase;color:var(--white);
+    margin-bottom:6px;letter-spacing:.04em;
+  }
+  .env-desc{font-size:12px;color:var(--chalk);line-height:1.5}
+
+  /* ══ INSIDE ══ */
+  .inside-list{list-style:none;margin-top:40px}
+  .inside-item{
+    display:flex;gap:18px;align-items:flex-start;
+    padding:18px 0;border-bottom:1px solid var(--wire);
+  }
+  .inside-item:first-child{border-top:1px solid var(--wire)}
+  .inside-arr{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:16px;font-weight:700;
+    color:var(--gold);flex-shrink:0;margin-top:0px;
+    line-height:1.5;
+  }
+  .inside-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:3px}
+  .inside-desc{font-size:12px;color:var(--chalk);line-height:1.6}
+
+  /* ══ PROOF STRIP ══ */
+  .proof-strip{
+    background:var(--plate);
+    border-top:1px solid var(--wire);
+    border-bottom:1px solid var(--wire);
+    padding:48px 0;
+  }
+  .proof-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(28px,4vw,42px);
+    font-weight:900;text-transform:uppercase;
+    color:var(--white);margin-bottom:32px;letter-spacing:-.01em;
+  }
+  .proof-title span{color:var(--gold)}
+  .proof-items{display:flex;flex-direction:column;gap:2px}
+  .proof-item{
+    background:var(--carbon);border:1px solid var(--wire);
+    padding:16px 20px;
+    display:flex;gap:16px;align-items:flex-start;
+  }
+  .proof-icon{color:var(--gold);font-size:14px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .proof-text{font-size:13px;color:var(--chalk);line-height:1.65}
+  .proof-text strong{color:var(--white);font-weight:600}
+
+  /* ══ OFFER ══ */
+  .offer-section{background:var(--carbon)}
+
+  .offer-headline{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:clamp(36px,5.5vw,64px);
+    font-weight:900;text-transform:uppercase;
+    line-height:.95;letter-spacing:-.01em;
+    color:var(--white);margin-bottom:16px;
+  }
+  .offer-headline .g{color:var(--gold)}
+
+  .offer-sub{
+    font-size:16px;color:var(--chalk);
+    max-width:540px;margin-bottom:40px;line-height:1.75;
+  }
+  .offer-sub strong{color:var(--white);font-weight:600}
+
+  .offer-box{
+    background:var(--plate);border:1px solid var(--wire);
+    padding:44px 40px;position:relative;overflow:hidden;
+  }
+  .offer-box::before{
+    content:'';position:absolute;
+    top:0;left:0;right:0;height:4px;
+    background:var(--gold);
+  }
+
+  .offer-items{list-style:none;margin-bottom:36px;display:flex;flex-direction:column;gap:10px}
+  .offer-items li{
+    font-size:14px;color:var(--chalk);
+    display:flex;gap:12px;align-items:flex-start;
+  }
+  .offer-items li::before{
+    content:'→';color:var(--gold);
+    font-family:'DM Mono',monospace;
+    font-size:11px;flex-shrink:0;margin-top:2px;
+  }
+
+  .price-block{margin-bottom:32px}
+  .price-from{
+    font-family:'DM Mono',monospace;font-size:11px;
+    color:var(--rust);text-decoration:line-through;
+    letter-spacing:.08em;margin-bottom:6px;
+  }
+  .price-main{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:72px;font-weight:900;
+    color:var(--gold);line-height:1;
+    letter-spacing:-.02em;
+  }
+  .price-note{
+    font-family:'DM Mono',monospace;font-size:10px;
+    color:var(--rust);letter-spacing:.08em;margin-top:4px;
+  }
+
+  .cta-offer{
+    display:block;width:100%;
+    background:var(--gold);color:var(--black);
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:24px;font-weight:900;
+    letter-spacing:.06em;text-transform:uppercase;
+    padding:22px;text-align:center;
+    text-decoration:none;
+    transition:background .15s,transform .1s;
+    border:none;cursor:pointer;
+    clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    margin-bottom:14px;
+  }
+  .cta-offer:hover{background:var(--gold-hot);transform:translateY(-1px)}
+  .cta-micro{
+    text-align:center;font-family:'DM Mono',monospace;
+    font-size:9px;color:var(--rust);letter-spacing:.08em;text-transform:uppercase;
+  }
+
+  .guarantee{
+    margin-top:28px;padding:22px 26px;
+    border:1px solid var(--gold-dim);
+    background:rgba(201,153,26,0.05);
+  }
+  .guarantee-title{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:18px;font-weight:800;
+    text-transform:uppercase;color:var(--gold);
+    letter-spacing:.04em;margin-bottom:10px;
+  }
+  .guarantee-text{font-size:13px;color:var(--chalk);line-height:1.72}
+
+  /* ══ FAQ ══ */
+  .faq-list{margin-top:36px;display:flex;flex-direction:column;gap:2px}
+  .faq-item{border:1px solid var(--wire)}
+  .faq-q{
+    padding:18px 22px;font-size:14px;font-weight:600;
+    color:var(--white);cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    user-select:none;transition:background .2s;
+  }
+  .faq-q:hover{background:var(--plate)}
+  .faq-plus{
+    color:var(--gold);font-size:20px;
+    transition:transform .2s;flex-shrink:0;font-weight:300;
+    font-family:'Barlow',sans-serif;
+  }
+  .faq-item.open .faq-plus{transform:rotate(45deg)}
+  .faq-a{
+    font-size:13px;color:var(--chalk);line-height:1.75;
+    padding:0 22px;max-height:0;overflow:hidden;
+    transition:max-height .3s ease,padding .3s;
+  }
+  .faq-item.open .faq-a{max-height:240px;padding:0 22px 18px}
+
+  /* ══ FOOTER ══ */
+  footer{
+    padding:56px 0;text-align:center;
+    border-top:3px solid var(--gold);
+    background:var(--carbon);
+  }
+  .footer-logo{
+    font-family:'Barlow Condensed',sans-serif;
+    font-size:32px;font-weight:900;
+    letter-spacing:.22em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:4px;
+  }
+  .footer-tag{
+    font-family:'DM Mono',monospace;font-size:9px;
+    color:var(--rust);letter-spacing:.15em;margin-bottom:32px;
+  }
+
+  /* ══ REVEAL ══ */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ══ RESPONSIVE ══ */
+  @media(max-width:600px){
+    .hero{min-height:auto}
+    .hero-content{padding:72px 0 52px}
+    section{padding:64px 0}
+    .env-row{grid-template-columns:1fr}
+    .offer-box{padding:28px 20px}
+    .pb-item{border-right:none;border-bottom:1px solid var(--wire);padding:14px}
+    .pain-bar-inner{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="wrap-wide"><div class="topbar-inner">
+    <div class="logo">U·N·I·C</div>
+    <a href=https://tally.so/r/LZMgYJ class="topbar-cta">Diagnóstico gratuito →</a>
+  </div></div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-slash"></div>
+  <div class="hero-slash2"></div>
+  <div class="hero-ghost">21</div>
+  <div class="wrap hero-content">
+    <div class="hero-tag">Protocolo de resultado — não de motivação</div>
+    <h1 class="hero-title">
+      <span class="line-stroke">Você vai</span><br>
+      <span class="line-gold">ter resultado.</span><br>
+      Ou eu corrijo<br>pessoalmente.
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">
+      21 dias. <strong>Diagnóstico preciso do que está te travando.</strong>
+      Método que funciona em casa, na praça ou com equipamento.
+      Para quem nunca treinou e para quem treina há meses sem sair do lugar.
+    </p>
+    <div class="hero-cta-wrap">
+      <a href="#oferta" class="cta-primary">Quero meu resultado em 21 dias</a>
+      <span class="cta-note">PDF · entrega imediata · garantia de 7 dias</span>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN BAR -->
+<div class="pain-bar">
+  <div class="wrap-wide"><div class="pain-bar-inner">
+    <div class="pb-item">
+      <div class="pb-num">21</div>
+      <div class="pb-label">Dias de protocolo</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-num">3</div>
+      <div class="pb-label">Níveis de entrada</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-num">3</div>
+      <div class="pb-label">Ambientes de treino</div>
+    </div>
+    <div class="pb-item">
+      <div class="pb-num">7</div>
+      <div class="pb-label">Dias de garantia</div>
+    </div>
+  </div></div>
+</div>
+
+<!-- ══ DOR ══ -->
+<section id="dor">
+  <div class="wrap reveal">
+    <div class="sec-tag">O que está acontecendo com você</div>
+    <h2 class="sec-title">A verdade<br>sobre por que<br><span class="g">você não evoluiu.</span></h2>
+    <p class="sec-body">
+      Não é falta de esforço. Não é falta de disciplina.
+      <strong>É que ninguém te deu um diagnóstico real.</strong>
+      Você tem tentado resolver um problema que nunca foi identificado corretamente.
+    </p>
+
+    <ul class="pain-list">
+      <li class="pain-item">
+        <div class="pain-n">01</div>
+        <div class="pain-text">Você treina. Às vezes com bastante constância. Mas <strong>chega sempre no mesmo teto</strong> — o mesmo número de repetições, o mesmo ponto onde o movimento para.</div>
+      </li>
+      <li class="pain-item">
+        <div class="pain-n">02</div>
+        <div class="pain-text">Começa com força total. <strong>Para na segunda ou terceira semana.</strong> Não por falta de vontade — você tem disciplina. Algo não fecha e a sequência quebra.</div>
+      </li>
+      <li class="pain-item">
+        <div class="pain-n">03</div>
+        <div class="pain-text"><strong>Sente o esforço. Sente o cansaço.</strong> Mas o corpo não muda na proporção. Força e forma não respondem como deveriam para o que você coloca.</div>
+      </li>
+      <li class="pain-item">
+        <div class="pain-n">04</div>
+        <div class="pain-text">Planilha do YouTube, personal, academia, app de treino. <strong>Já tentou. O resultado foi o mesmo.</strong> Porque o problema de base nunca foi resolvido.</div>
+      </li>
+      <li class="pain-item">
+        <div class="pain-n">05</div>
+        <div class="pain-text">Ou você nunca começou porque acha que precisa de estrutura que ainda não tem. <strong>Está esperando a hora certa — que nunca chega sozinha.</strong></div>
+      </li>
+    </ul>
+
+    <div class="verdict">
+      <p>O bloqueio não está no seu corpo.<br><span>Está em um padrão motor que nunca foi diagnosticado.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MÉTODO ══ -->
+<section id="metodo">
+  <div class="wrap reveal">
+    <div class="sec-tag">O protocolo</div>
+    <h2 class="sec-title">Quatro fases.<br><span class="g">Uma sequência</span><br>que funciona.</h2>
+    <p class="sec-body">
+      UNIC começa pelo diagnóstico — não pelo treino.
+      <strong>Você não pode trabalhar um bloqueio que não consegue ver.</strong>
+      Cada semana tem um objetivo preciso e é pré-condição para a próxima.
+    </p>
+
+    <div class="method-grid">
+      <div class="mc">
+        <div class="mc-ghost">U</div>
+        <div class="mc-week">Semana 1</div>
+        <div class="mc-name">Unveil</div>
+        <div class="mc-desc">Revelar o bloqueio em movimento. O objetivo não é cansaço — é diagnóstico preciso de onde você trava.</div>
+      </div>
+      <div class="mc">
+        <div class="mc-ghost">N</div>
+        <div class="mc-week">Semana 2</div>
+        <div class="mc-name">Nerve</div>
+        <div class="mc-desc">Ativar as conexões dormentes entre cérebro e músculo. Não é volume — é sinal neural. Precisão máxima.</div>
+      </div>
+      <div class="mc">
+        <div class="mc-ghost">I</div>
+        <div class="mc-week">Semana 3 — pt.1</div>
+        <div class="mc-name">Integrate</div>
+        <div class="mc-desc">Os padrões treinados separadamente agora funcionam juntos. O corpo opera como sistema.</div>
+      </div>
+      <div class="mc">
+        <div class="mc-ghost">C</div>
+        <div class="mc-week">Semana 3 — pt.2</div>
+        <div class="mc-name">Conquer</div>
+        <div class="mc-desc">Marco concreto. Dia 21 você refaz os testes do Dia 1 e vê a diferença com seus próprios números.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PARA QUEM ══ -->
+<section id="paraquem">
+  <div class="wrap reveal">
+    <div class="sec-tag">Quem entra no protocolo</div>
+    <h2 class="sec-title">Não importa<br>de onde você<br><span class="g">começa hoje.</span></h2>
+    <p class="sec-body">
+      Os 5 testes de diagnóstico do Dia 1 revelam o seu ponto exato.
+      <strong>Cada exercício tem a versão certa para onde você está agora — não para onde você acha que deveria estar.</strong>
+    </p>
+
+    <div class="who-stack">
+      <div class="who-item">
+        <div class="who-dot"></div>
+        <div>
+          <div class="who-level">Nível 1 — Iniciante absoluto</div>
+          <div class="who-title">Nunca treinou de verdade</div>
+          <div class="who-desc">Começa do zero com base sólida. Nada assumido. Cada posicionamento explicado do início — sem jargão, sem pressupor que você sabe fazer.</div>
+        </div>
+      </div>
+      <div class="who-item">
+        <div class="who-dot"></div>
+        <div>
+          <div class="who-level">Nível 2 — Iniciante ativo</div>
+          <div class="who-title">Já tentou. Trava no mesmo ponto.</div>
+          <div class="who-desc">Tem alguma base mas o padrão motor tem bloqueio. O protocolo identifica exatamente onde e trabalha direto no problema.</div>
+        </div>
+      </div>
+      <div class="who-item">
+        <div class="who-dot"></div>
+        <div>
+          <div class="who-level">Nível 3 — Intermediário frustrado</div>
+          <div class="who-title">Treina há meses. Parou de evoluir.</div>
+          <div class="who-desc">Tem força. O bloqueio é de padrão motor, não de esforço. A semana NERVE foi criada exatamente para isso.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="env-row" style="margin-top:28px">
+      <div class="env-card">
+        <div class="env-label">Em casa</div>
+        <div class="env-desc">Sem nenhum equipamento. Versão explicitamente marcada em cada exercício.</div>
+      </div>
+      <div class="env-card">
+        <div class="env-label">Na praça</div>
+        <div class="env-desc">Barras e estruturas públicas. Variante específica por exercício.</div>
+      </div>
+      <div class="env-card">
+        <div class="env-label">Com equip.</div>
+        <div class="env-desc">Barra de porta, paralelas. Versão avançada quando disponível.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ O QUE ESTÁ DENTRO ══ -->
+<section id="dentro">
+  <div class="wrap reveal">
+    <div class="sec-tag">O que está dentro</div>
+    <h2 class="sec-title">Construído para<br>quem <span class="g">nunca teve</span><br>referência real.</h2>
+    <p class="sec-body">
+      Cada exercício tem passo a passo de posicionamento escrito como se fosse a primeira vez de alguém.
+      <strong>Porque para a maioria, é a primeira vez de verdade.</strong>
+    </p>
+
+    <ul class="inside-list">
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">Glossário completo — linguagem sem enrolação</div>
+          <div class="inside-desc">Todos os termos explicados como você explicaria para alguém que nunca ouviu aquelas palavras.</div>
+        </div>
+      </li>
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">5 testes de diagnóstico — antes de qualquer treino</div>
+          <div class="inside-desc">Revelam em qual nível você está e onde está o bloqueio. Feitos no Dia 1 e repetidos no Dia 21.</div>
+        </div>
+      </li>
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">Passo a passo de posicionamento em cada exercício</div>
+          <div class="inside-desc">Qual parte do corpo fica onde, qual ângulo, onde olhar, como respirar, qual erro evitar. Não assume nada.</div>
+        </div>
+      </li>
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">3 semanas completas — UNVEIL · NERVE · INTEGRATE · CONQUER</div>
+          <div class="inside-desc">Séries, repetições, descanso e o que anotar em cada sessão para rastrear a evolução real.</div>
+        </div>
+      </li>
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">3 variações por exercício × 3 níveis de entrada</div>
+          <div class="inside-desc">Sem equipamento, praça, ou com equipamento em casa. Você usa o que se encaixa no seu ponto hoje.</div>
+        </div>
+      </li>
+      <li class="inside-item">
+        <span class="inside-arr">→</span>
+        <div>
+          <div class="inside-title">Reteste no Dia 21 — você mede, não acredita</div>
+          <div class="inside-desc">Os mesmos 5 testes do Dia 1. Os números mostram o que mudou — sem depender de motivação ou sensação.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ PROOF STRIP ══ -->
+<div class="proof-strip">
+  <div class="wrap reveal">
+    <div class="proof-title">O que muda em <span>21 dias</span> quando você tem método.</div>
+    <div class="proof-items">
+      <div class="proof-item">
+        <div class="proof-icon">01</div>
+        <div class="proof-text"><strong>Você para de treinar no escuro.</strong> Sabe exatamente onde está o bloqueio — e o que fazer sobre ele. Isso por si só já é mais do que a maioria das pessoas tem.</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">02</div>
+        <div class="proof-text"><strong>O padrão motor começa a mudar.</strong> As conexões que estavam dormentes acordam. O movimento flui diferente — você sente antes de ver.</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-icon">03</div>
+        <div class="proof-text"><strong>Os números mudam no Dia 21.</strong> Mais repetições, mais tempo, mais controle. Medido. Comparado. Documentado. Não uma sensação — um resultado.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OFERTA ══ -->
+<section id="oferta" class="offer-section">
+  <div class="wrap reveal">
+    <div class="sec-tag">Acesso ao protocolo</div>
+    <h2 class="offer-headline">Você leu até aqui.<br><span class="g">O método existe.</span><br>O próximo passo<br>é seu.</h2>
+    <p class="offer-sub">
+      Não tem mensalidade. Não tem academia obrigatória.
+      <strong>Acesso imediato. Entrega por e-mail. Funciona hoje.</strong>
+    </p>
+
+    <div class="offer-box">
+      <ul class="offer-items">
+        <li>Glossário completo em linguagem simples</li>
+        <li>5 testes de diagnóstico + reteste no Dia 21</li>
+        <li>Passo a passo de posicionamento em cada exercício</li>
+        <li>3 semanas — UNVEIL · NERVE · INTEGRATE · CONQUER</li>
+        <li>3 variações × 3 níveis — seu ambiente, seu ponto</li>
+        <li>Diário integrado para rastrear a evolução</li>
+      </ul>
+
+      <div class="price-block">
+        <div class="price-from">Valor após lançamento: R$97</div>
+        <div class="price-main">R$47</div>
+        <div class="price-note">Pagamento único · Lançamento</div>
+      </div>
+
+      <a href=https://pay.kiwify.com.br/xFTsQMP class="cta-offer">
+        Entrar no protocolo agora
+      </a>
+      <div class="cta-micro">Pagamento seguro · Entrega imediata · Garantia 7 dias</div>
+
+      <div class="guarantee">
+        <div class="guarantee-title">Garantia real — 7 dias</div>
+        <div class="guarantee-text">
+          Aplica o protocolo por 7 dias. Anota o que sentiu em cada treino.
+          Se não perceber nenhuma diferença no padrão de movimento, me manda os registros
+          e eu refaço seu diagnóstico pessoalmente, do zero, sem custo.
+          Sem formulário complicado. Sem pergunta desnecessária.
+          <strong style="color:var(--white)">O risco é meu. O resultado é seu.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="wrap reveal">
+    <div class="sec-tag">Dúvidas</div>
+    <h2 class="sec-title">Respostas<br><span class="g">diretas.</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="tf(this)">Funciona para quem nunca treinou na vida? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Sim — foi construído para isso. O Nível 1 começa do zero absoluto. Exercícios com joelhos apoiados, sem barra, sem nada além do chão. Cada posicionamento explicado como se fosse a primeira vez.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tf(this)">Preciso de equipamento? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Não. Cada exercício tem a versão sem equipamento marcada. Não existe nenhum exercício que exija barra ou paralela sem ter uma alternativa para quem não tem nada em casa.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tf(this)">Treino há mais de 1 ano e parei de evoluir. É para mim? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Exatamente para você. A semana NERVE foi criada para acordar conexões que pararam de responder em quem treina há tempo. Você tem força — o bloqueio é de padrão motor. O protocolo vai direto nesse ponto.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tf(this)">Quanto tempo por treino? <span class="faq-plus">+</span></div>
+        <div class="faq-a">Semana 1: 25–35 min. Semana 2: 30–40 min. Semana 3: 35–50 min. Quatro dias por semana. Menos tempo? Menos séries — mas não pula o treino.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tf(this)">E se eu não ver resultado? <span class="faq-plus">+</span></div>
+        <div class="faq-a">7 dias de aplicação + registros do diário de treino → me manda → eu refaço o diagnóstico do zero sem custo. Sem formulário. Sem burocracia. Funciona ou eu corrijo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-logo">U · N · I · C</div>
+    <div class="footer-tag">Unveil · Nerve · Integrate · Conquer</div>
+    <a href=https://pay.kiwify.com.br/xFTsQMP class="cta-primary" style="font-size:20px">
+      Entrar no protocolo — R$47
+    </a>
+  </div>
+</footer>
+
+<script>
+function tf(btn){
+  const item=btn.closest('.faq-item');
+  const was=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+  if(!was)item.classList.add('open');
+}
+const obs=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
